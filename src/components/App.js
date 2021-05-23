@@ -7,8 +7,11 @@ import Eventform from './EventForm'
 import AppContext from '../components/contexts/AppContext'
 //どこでreducerの内容を反映させているのか
 const App = () => {
+  const initialState = {
+    events: []
+  }
   //第一引数は＾reducer?第二引数は初期値、第三引数は初期化のコールバック
-  const [state, dispatch] = useReducer(reducer, [])
+  const [state, dispatch] = useReducer(reducer, initialState)
 
 
   //イベントハンドラ（状態変化？）は関数らしい

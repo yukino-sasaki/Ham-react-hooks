@@ -8,6 +8,7 @@ const EventForm = () => {
     //const [state, dispatch] = useReducer(reducer, [])
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    //AppContext.Providerを使ってvalue={state,dispatch}を渡している
     const { state, dispatch } = useContext(AppContext)
     //イベントハンドラ（状態変化？）は関数らしい
     const addEvent = (e) => {
@@ -43,7 +44,7 @@ const EventForm = () => {
         const result = window.confirm('全てのイベントを本当に削除しても良いですか？')
         if (result) dispatch({ type: DELETE_ALL_EVENT })
     }
-
+    console.log(state)
     const unCreatable = title === '' || body === ''
 
     return (
@@ -71,7 +72,7 @@ const EventForm = () => {
                     disabled={unCreatable}
                 >イベントを作成する</button>
                 <button className="btn btn-danger"
-                    disabled={state.length === 0}
+                    disabled={state.events.length === 0}
                     onClick={deleteAllEvents}
                 >全てのイベントを削除する</button>
             </form>

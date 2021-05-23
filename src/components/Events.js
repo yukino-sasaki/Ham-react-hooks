@@ -3,6 +3,7 @@ import Event from './Event.js'
 import AppContext from '../components/contexts/AppContext'
 
 const Events = () => {
+    //AppContext.Providerを使ってvalue={state,dispatch}を渡している
     const { state } = useContext(AppContext)
     return (
         <>
@@ -17,7 +18,7 @@ const Events = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {state.map((event, index) => (
+                    {state.events.map((event, index) => (
                         <Event key={index} event={event} />
                     ))}
 
