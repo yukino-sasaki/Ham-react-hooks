@@ -1,9 +1,10 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import reducer from '../reducer'//index.jsは略せる
 import './App.css';
 import Events from './Events'
 import Eventform from './EventForm'
+import AppContext from '../components/contexts/AppContext'
 //どこでreducerの内容を反映させているのか
 const App = () => {
   //第一引数は＾reducer?第二引数は初期値、第三引数は初期化のコールバック
@@ -22,11 +23,13 @@ const App = () => {
 
 
   return (
-    <div className="container-fluid">
-      <Eventform state={state} dispatch={dispatch} />
-      <Events state={state} dispatch={dispatch} />
+    <AppContext.Provider value={{ state, dispatch }}>
+      <div className="container-fluid">
+        <Eventform />
+        <Events />
 
-    </div>
+      </div>
+    </AppContext.Provider>
   )
 }
 

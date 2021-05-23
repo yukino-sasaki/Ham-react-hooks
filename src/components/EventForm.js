@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { CREATE_EVENT, DELETE_ALL_EVENT } from '../actions'
+import AppContext from '../components/contexts/AppContext'
 
-const EventForm = ({ state, dispatch }) => {
+
+const EventForm = () => {
     //第一引数は＾reducer?第二引数は初期値、第三引数は初期化のコールバック
     //const [state, dispatch] = useReducer(reducer, [])
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const { state, dispatch } = useContext(AppContext)
     //イベントハンドラ（状態変化？）は関数らしい
     const addEvent = (e) => {
         e.preventDefault()

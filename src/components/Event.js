@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { DELETE_EVENT } from '../actions'
+import AppContext from '../components/contexts/AppContext'
 
-const Event = ({ dispatch, event }) => {
+const Event = ({ event }) => {
+    const { dispatch } = useContext(AppContext)
     const id = event.id
     //dispatchの情報が変化するため.どれを削除するか↓id
     const handleClickDeleteButton = () => {
