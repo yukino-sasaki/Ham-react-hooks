@@ -1,7 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { CREATE_EVENT, DELETE_ALL_EVENT } from '../actions'
+import {
+    CREATE_EVENT,
+    ADD_OPERATION_LOG,
+    DELETE_OPERATION_LOGS,
+    DELETE_ALL_EVENT
+} from '../actions'
 import AppContext from '../components/contexts/AppContext'
-
+import { timeCurrentIso8601 } from '../utils'
 
 const EventForm = () => {
     //第一引数は＾reducer?第二引数は初期値、第三引数は初期化のコールバック
@@ -27,6 +32,12 @@ const EventForm = () => {
             body,
         })
 
+        dispatch({
+            type: ADD_OPERATION_LOG,
+            description: 'イベントを作成しました',
+            operatedAt: timeCurrentIso8601()
+        })
+
         console.log(state.length)
         console.log(typeof (Object.entries(state)))
         setTitle('')
@@ -42,7 +53,15 @@ const EventForm = () => {
     const deleteAllEvents = (e) => {
         e.preventDefault()
         const result = window.confirm('全てのイベントを本当に削除しても良いですか？')
-        if (result) dispatch({ type: DELETE_ALL_EVENT })
+        if (result) {
+            dispatch({ type: DELETE_ALL_EVENT })
+            dispatch({
+                //logを追加するtypeがaddであってそれは内容に寄らない
+                type: ADD_OPERATION_LOG,
+                description: '全てのイベントを削除しました',
+                operatedAt: timeCurrentIso8601()
+            })
+        }
     }
     console.log(state)
     const unCreatable = title === '' || body === ''

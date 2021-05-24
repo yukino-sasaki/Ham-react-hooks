@@ -2,6 +2,7 @@ import { CREATE_EVENT, DELETE_ALL_EVENT, DELETE_EVENT } from '../actions'
 
 //stateはアラタに作っている空の配列、actionはフォームに入力した値を引っ張ってきたpropsみたいなイメージだと思う
 //typeはデフォルトで決まっているのか、それとも自分で設定しているのかは謎
+//eventformから
 const events = (state = [], action) => {
     switch (action.type) {
         case CREATE_EVENT:
@@ -19,8 +20,11 @@ const events = (state = [], action) => {
         case DELETE_ALL_EVENT:
 
             return []
+
     }
+    console.log(action.type)
     return null
+
 }
 
 export default events
