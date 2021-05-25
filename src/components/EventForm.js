@@ -32,11 +32,11 @@ const EventForm = () => {
             body,
         })
 
-        /*   dispatch({
-              type: ADD_OPERATION_LOG,
-              description: 'イベントを作成しました',
-              operatedAt: timeCurrentIso8601()
-          }) */
+        dispatch({
+            type: ADD_OPERATION_LOG,
+            description: 'イベントを作成しました',
+            operatedAt: timeCurrentIso8601()
+        })
 
         console.log(state.length)
         console.log(typeof (Object.entries(state)))
