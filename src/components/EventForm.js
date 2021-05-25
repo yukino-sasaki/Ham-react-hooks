@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import {
     CREATE_EVENT,
     ADD_OPERATION_LOG,
-    DELETE_OPERATION_LOGS,
+    DELETE_ALL_OPERATION_LOGS,
     DELETE_ALL_EVENT
 } from '../actions'
 import AppContext from '../components/contexts/AppContext'
@@ -32,11 +32,11 @@ const EventForm = () => {
             body,
         })
 
-        dispatch({
-            type: ADD_OPERATION_LOG,
-            description: 'イベントを作成しました',
-            operatedAt: timeCurrentIso8601()
-        })
+        /*   dispatch({
+              type: ADD_OPERATION_LOG,
+              description: 'イベントを作成しました',
+              operatedAt: timeCurrentIso8601()
+          }) */
 
         console.log(state.length)
         console.log(typeof (Object.entries(state)))
@@ -66,6 +66,15 @@ const EventForm = () => {
     console.log(state)
     const unCreatable = title === '' || body === ''
 
+    //イベントハンドラなのでイベントが引数としてわたってくる
+    const deleteAllOperationLogs = e => {
+        //ボタンをクリックするとページのリロードが走ってしまうらしい
+        e.preventDefault()
+        const result = window.comfirm('全ての操作ログを保温等に削除しても良いですか？')
+        if (result) {
+            dispatch({ type: DELETE_ALL_OPERATION_LOGS })
+        }
+    }
     return (
         <>
 
@@ -94,6 +103,10 @@ const EventForm = () => {
                     disabled={state.events.length === 0}
                     onClick={deleteAllEvents}
                 >全てのイベントを削除する</button>
+                <button className="btn btn-danger"
+                    disabled={state.operationLogs.length === 0}
+                    onClick={deleteAllOperationLogs}
+                >全ての操作ログを削除する</button>
             </form>
             <h4>イベント一覧</h4>
         </>

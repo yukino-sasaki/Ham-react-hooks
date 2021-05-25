@@ -5,6 +5,7 @@ import AppContext from '../components/contexts/AppContext'
 const Events = () => {
     //AppContext.Providerを使ってvalue={state,dispatch}を渡している
     const { state } = useContext(AppContext)
+    console.log(state.events)
     return (
         <>
 
