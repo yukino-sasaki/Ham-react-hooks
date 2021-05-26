@@ -1,5 +1,5 @@
 import React from 'react'
-import OperationLog from './OperationLog''
+import OperationLog from './OperationLog'
 import AppContext from '../contexts/AppContext'
 const OperationLogs = () => {
     const { state } = useContext(AppContext)
